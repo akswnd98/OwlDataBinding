@@ -1,8 +1,8 @@
 import 'reflect-metadata';
-import { injectable } from 'inversify';
+import { injectable, unmanaged } from 'inversify';
 import Model, { BaseDataType } from '../Model';
 
-export type ConstructorParam<DataType> = {
+export type ConstructorParam<DataType extends BaseDataType> = {
   model: Model<DataType>;
 };
 
@@ -10,7 +10,7 @@ export type ConstructorParam<DataType> = {
 export default abstract class Operator<DataType extends BaseDataType> {
   protected data!: DataType;
 
-  constructor (payload: ConstructorParam<DataType>) {
+  constructor (@unmanaged() payload: ConstructorParam<DataType>) {
     payload.model.bindOperator(this);
   }
 

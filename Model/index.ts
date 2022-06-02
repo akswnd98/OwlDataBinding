@@ -12,7 +12,7 @@ export type BaseDataType = {
 
 @injectable()
 export default abstract class Model<DataType extends BaseDataType> {
-  private data: DataType;
+  protected data: DataType;
 
   constructor (@unmanaged() payload: ConstructorParam<DataType>) {
     this.data = payload.data;
